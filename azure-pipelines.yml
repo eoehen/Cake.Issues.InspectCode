@@ -12,7 +12,16 @@ pr:
 jobs:
 - job: Windows
   pool:
-    vmImage: 'vs2017-win2016'
+    vmImage: 'windows-latest'
   steps:
-  - powershell: ./build.ps1
-    displayName: 'Cake Build'
+  - task: Cache@2
+    inputs:
+      key: '"$(Agent.OS)" | recipe.cake'
+      path: 'tools'
+  - task: Cake@2
+    inputs:
+      script: 'recipe.cake'
+      target: 'CI'
+      verbosity: 'Normal'
+      Bootstrap: true
+      Version: '0.38.5'
