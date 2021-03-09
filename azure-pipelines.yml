@@ -30,6 +30,6 @@ steps:
   inputs:
     script: 'recipe.cake'
     target: 'CI'
-    verbosity: 'Normal'
+    verbosity: 'Verbose'
     Bootstrap: true
     Version: '0.38.5'
