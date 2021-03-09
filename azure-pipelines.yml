@@ -9,19 +9,27 @@ pr:
 - release/*
 - hotfix/*
 
-jobs:
-- job: Windows
-  pool:
-    vmImage: 'windows-latest'
-  steps:
-  - task: Cache@2
-    inputs:
-      key: '"$(Agent.OS)" | recipe.cake'
-      path: 'tools'
-  - task: Cake@2
-    inputs:
-      script: 'recipe.cake'
-      target: 'CI'
-      verbosity: 'Normal'
-      Bootstrap: true
-      Version: '0.38.5'
+strategy:
+  matrix:
+    linux:
+      imageName: 'ubuntu-20.04'
+    mac:
+      imageName: 'macOS-10.15'
+    windows:
+      imageName: 'vs2017-win2016'
+
+pool:
+  vmImage: $(imageName)
+
+steps:
+- task: Cache@2
+  inputs:
+    key: '"$(Agent.OS)" | recipe.cake'
+    path: 'tools'
+- task: Cake@2
+  inputs:
+    script: 'recipe.cake'
+    target: 'CI'
+    verbosity: 'Normal'
+    Bootstrap: true
+    Version: '0.38.5'
