@@ -10,6 +10,7 @@ BuildParameters.SetParameters(
     repositoryOwner: "cake-contrib",
     repositoryName: "Cake.Issues.InspectCode",
     appVeyorAccountName: "cakecontrib",
+    shouldRunDotNetCorePack: true,
     shouldGenerateDocumentation: false,
     shouldRunCodecov: false);
 

@@ -7,13 +7,45 @@
     <Authors>BBT Software AG</Authors>
     <Company>BBT Software AG</Company>
     <Copyright>Copyright © BBT Software AG and contributors</Copyright>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <RepositoryType>git</RepositoryType>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
-  
+
+  <PropertyGroup>
+      <!-- Properties related to packaging -->
+      <Authors>BBT Software AG and contributors</Authors>
+      <Copyright>Copyright © BBT Software AG and contributors</Copyright>
+      <Description>
+The JetBrains Inspect Code support for the Cake.Issues addin for Cake allows you to read issues logged by JetBrains Inspect Code.
+
+This addin provides the aliases for reading JetBrains Inspect Code issues and providing them to the Cake.Issues addin.
+It also requires the core Cake.Issues addin.
+
+There are also additional addins for generating reports or posting issues to pull requests.
+
+See the Project Site for an overview of the whole ecosystem of addins for working with issues in Cake scripts.
+      </Description>
+      <PackageIcon>icon.png</PackageIcon>
+      <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
+      <PackageLicenseExpression>MIT</PackageLicenseExpression>
+      <PackageProjectUrl>https://cakeissues.net</PackageProjectUrl>
+      <PackageTags>Cake Script;Cake-Issues:Cake-IssueProvider;CodeAnalysis;Linting;InspectCode</PackageTags>
+      <RepositoryUrl>https://github.com/cake-contrib/Cake.StrongNameSigner.git</RepositoryUrl>
+      <PackageReleaseNotes>https://github.com/cake-contrib/Cake.Issues.InspectCode/releases/tag/$(Version)</PackageReleaseNotes>
+  </PropertyGroup>
+
   <PropertyGroup>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <CodeAnalysisRuleSet>..\Cake.Issues.InspectCode.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
+
+  <ItemGroup>
+      <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>  
+
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Cake.Issues.InspectCode.xml</DocumentationFile>
   </PropertyGroup>
@@ -23,11 +55,23 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Cake.Core" Version="1.0.0" />
+    <PackageReference Include="Cake.Addin.Analyzer" Version="0.1.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Cake.Core" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Cake.Issues" Version="1.0.0-beta0001" />
+    <PackageReference Include="CakeContrib.Guidelines" Version="0.5.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
